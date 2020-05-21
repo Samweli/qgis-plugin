@@ -115,6 +115,7 @@ class CoverageSearchThread(QThread):
 
             collected_results = []
             for geometry in self.geometries:
+                print(geometry)
                 results = searcher_client.get_coverage(
                     geometry, self.crop_type, self.sowing_date,
                     filters=self.filters)
