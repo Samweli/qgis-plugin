@@ -143,8 +143,7 @@ class BridgeAPIWrapperTest(unittest.TestCase):
         list_of_image_date = ['2019-11-25', '2019-11-27']
         field_map = bridge_api.get_samz_map(
             season_field_id, list_of_image_date, params=params)
-        # Currently the API returns an error when we try to create
-        # custom SAMZ map.
+
         self.assertFalse('seasonField' in field_map)
 
     def test_get_content(self):
