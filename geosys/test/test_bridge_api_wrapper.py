@@ -138,7 +138,7 @@ class BridgeAPIWrapperTest(unittest.TestCase):
 
         # test SAMZ auto
         field_map = bridge_api.get_samz_map(
-            season_field_id, params=params)
+            season_field_id, [], params=params)
         self.assertTrue('seasonField' in field_map)
 
         # test SAMZ custom
