@@ -41,9 +41,9 @@ class HelpDialog(QtWidgets.QDialog, FORM_CLASS):
 
         # Make the html links open on the default browser instead
         # of opening the current help dialog.
-        self.help_web_view.page().setLinkDelegationPolicy(
-            QtWebKitWidgets.QWebPage.DelegateAllLinks
-        )
+        # self.help_web_view.page().setLinkDelegationPolicy(
+        #     QtWebKitWidgets.QWebPage.DelegateAllLinks
+        # )
         self.help_web_view.linkClicked.connect(self.link_clicked)
 
         self.help_web_view.setHtml(get_help_html(message))

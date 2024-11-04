@@ -1,7 +1,6 @@
 # coding=utf-8
 """GUI utilities for the dock and the multi Exposure Tool."""
 import os
-from past.builtins import cmp
 
 from qgis.core import (
     QgsProject,
@@ -110,7 +109,7 @@ def add_ordered_combo_item(
     for combo_index in range(0, size):
         item_text = combo.itemText(combo_index)
         # see if text alphabetically precedes item_text
-        if cmp(text.lower(), item_text.lower()) < 0:
+        if text.lower() < item_text.lower():
             if icon:
                 combo.insertItem(combo_index, icon, text, data)
             else:
