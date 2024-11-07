@@ -319,7 +319,7 @@ def generate_plugin_repo_xml(
                 "url": prerelease_url,
                 "published_at": dt.datetime.strptime(
                     prerelease_time, "%Y-%m-%dT%H:%M:%SZ"
-                ),
+                ) if prerelease_time else dt.datetime.now(),
             }
         ]
     else:
