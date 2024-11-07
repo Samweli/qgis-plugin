@@ -64,10 +64,12 @@ jobs:
           
           python admin.py generate-plugin-repo-xml  --prerelease --prerelease-url "$DOWNLOAD_URL" --prerelease-time "$(date +'%Y-%m-%dT%H:%M:%SZ')" --prerelease-filename "$ZIP_NAME"
           
+          git config --global --add safe.directory /__w/qgis-plugin/qgis-plugin
+          
           echo " " >> docs/repository/plugins.xml
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global --add safe.directory /__w/qgis-plugin/qgis-plugin/
+          git config --global --add safe.directory /__w/qgis-plugin/qgis-plugin
           
           
           git add docs/repository
