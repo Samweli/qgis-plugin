@@ -21,15 +21,12 @@ jobs:
 
       - name: Install build requirements
         run: |
-          pip3 install -r requirements.txt
-
-      - name: Set Git configuration
-        run: |
-          git config --global --add safe.directory /__w/qgis-plugin/qgis-plugin
+          python -m pip install -r requirements.txt
 
       - name: Build zipfile
         run: |
-          python3 admin.py generate-zip
+          python -c "import requests; print('requests is installed.')" || echo "requests is not installed."
+          python admin.py generate-zip
 
       - name: get zip details
         id: get-zip-details
