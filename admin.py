@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
 
-import httpx
+import requests
 import typer
 
 LOCAL_ROOT_DIR = Path(__file__).parent.resolve()
@@ -104,11 +104,12 @@ def generate_zip(
 
 @app.command()
 def build(
-        context: typer.Context,
-        output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR / "build" / SRC_NAME,
-        clean: bool = True,
-        tests: bool = False
-) -> Path:
+    context: typer.Context,
+    output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR
+    / "build"
+    / SRC_NAME,
+    clean: bool = True,
+        tests: bool = False) -> Path:
     """ Builds plugin directory for use in QGIS application.
 
     :param context: Application context
@@ -141,7 +142,8 @@ def build(
 
 @app.command()
 def copy_icon(
-        output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR / "build/temp",
+    output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR
+    / "build/temp",
 ) -> Path:
     """ Copies the plugin intended icon to the specified output
         directory.
@@ -166,9 +168,9 @@ def copy_icon(
 
 @app.command()
 def copy_source_files(
-        output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR / "build/temp",
-        tests: bool = False
-):
+    output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR
+    / "build/temp",
+        tests: bool = False):
     """ Copies the plugin source files to the specified output
             directory.
 
@@ -208,8 +210,9 @@ def copy_source_files(
 
 @app.command()
 def compile_resources(
-        context: typer.Context,
-        output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR / "build/temp",
+    context: typer.Context,
+    output_directory: typing.Optional[Path] = LOCAL_ROOT_DIR
+    / "build/temp",
 ):
     """ Compiles plugin resources using the pyrcc package
 
@@ -269,7 +272,10 @@ def _log(
     if verbose:
         typer.echo(msg, *args, **kwargs)
 
+
 app.command()
+
+
 def generate_plugin_repo_xml(
         context: typer.Context,
         prerelease=False,
@@ -402,7 +408,10 @@ def _get_existing_releases(
     """
     base_url = "https://api.github.com/repos/" \
                "Samweli/qgis-plugin/releases"
-    response = httpx.get(base_url)
+
+    session = requests.Session()
+    response = session.get(base_url)
+
     result = []
     if response.status_code == 200:
         payload = response.json()
@@ -431,8 +440,8 @@ def _get_existing_releases(
 def _get_latest_releases(
         current_releases: typing.List[GithubRelease],
 ) -> typing.Tuple[
-    typing.Optional[GithubRelease],
-    typing.Optional[GithubRelease]]:
+        typing.Optional[GithubRelease],
+        typing.Optional[GithubRelease]]:
     """ Searches for the latest plugin releases from the Github plugin releases.
 
     :param current_releases: Existing plugin releases
