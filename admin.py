@@ -273,9 +273,7 @@ def _log(
         typer.echo(msg, *args, **kwargs)
 
 
-app.command()
-
-
+@app.command()
 def generate_plugin_repo_xml(
         context: typer.Context,
         prerelease=False,
