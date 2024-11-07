@@ -30,8 +30,7 @@ jobs:
 
       - name: Build zipfile
         run: |
-          pip3 install httpx
-          python admin.py generate-zip
+          python3 admin.py generate-zip
 
       - name: get zip details
         id: get-zip-details
