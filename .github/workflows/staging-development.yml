@@ -26,12 +26,11 @@ jobs:
 
       - name: Install build requirements
         run: |
-          pip install -r requirements.txt
-          pip install -r requirements_testing.txt
+          pip3 install -r requirements.txt
 
       - name: Build zipfile
         run: |
-
+          pip3 install httpx
           python admin.py generate-zip
 
       - name: get zip details
@@ -87,4 +86,3 @@ jobs:
           git add -f docs/repository/$REF_NAME/$ZIP_NAME
           git commit -m "Update on the staging repository"
           git push origin release
-
