@@ -276,10 +276,10 @@ def _log(
 @app.command()
 def generate_plugin_repo_xml(
         context: typer.Context,
-        prerelease=False,
-        prerelease_url=None,
-        prerelease_time=None,
-        prerelease_filename=None,
+        prerelease: bool = False,
+        prerelease_url: str = None,
+        prerelease_time: str = None,
+        prerelease_filename: str =None,
 ):
     """Generates the plugin repository xml file, from which users
         can use to install the plugin in QGIS.
