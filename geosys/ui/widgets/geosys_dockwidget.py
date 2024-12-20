@@ -72,13 +72,28 @@ from geosys.bridge_api.default import (
     DEFAULT_OFFSET,
     DEFAULT_COVERAGE_PERCENT)
 from geosys.bridge_api.definitions import (
-    ARCHIVE_MAP_PRODUCTS, ALL_SENSORS, SENSORS, NDVI, EVI,
-    SAMZ, SOIL, SLOPE, ELEVATION, REFLECTANCE, LANDSAT_8, LANDSAT_9, SENTINEL_2,
-    INSEASONFIELD_AVERAGE_NDVI, INSEASONFIELD_AVERAGE_REVERSE_NDVI,
-    INSEASONFIELD_AVERAGE_LAI, INSEASONFIELD_AVERAGE_REVERSE_LAI,
-    COLOR_COMPOSITION, SAMPLE_MAP, IGNORE_LAYER_FIELDS, MASK_PARAMETERS,
-    ALLOWED_FIELD_TYPES
-)
+    ARCHIVE_MAP_PRODUCTS,
+    ALL_SENSORS,
+    SENSORS,
+    NDVI,
+    EVI,
+    SAMZ,
+    SOIL,
+    SLOPE,
+    ELEVATION,
+    REFLECTANCE,
+    LANDSAT_8,
+    LANDSAT_9,
+    SENTINEL_2,
+    INSEASONFIELD_AVERAGE_NDVI,
+    INSEASONFIELD_AVERAGE_REVERSE_NDVI,
+    INSEASONFIELD_AVERAGE_LAI,
+    INSEASONFIELD_AVERAGE_REVERSE_LAI,
+    COLOR_COMPOSITION,
+    SAMPLE_MAP,
+    IGNORE_LAYER_FIELDS,
+    MASK_PARAMETERS,
+    ALLOWED_FIELD_TYPES)
 from geosys.bridge_api_wrapper import BridgeAPI
 from geosys.bridge_api.utilities import get_definition
 from geosys.ui.help.help_dialog import HelpDialog
@@ -349,7 +364,7 @@ class GeosysPluginDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
 
                 self.kmz_radio_button.setChecked(False)
                 self.kmz_radio_button.setEnabled(False)
-                
+
                 # Hide groups that are not needed for color composition
                 self.hotspots_group.hide()
                 self.fetch_rx_group.hide()
@@ -1167,13 +1182,18 @@ class GeosysPluginDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
                 if self.map_product == SAMPLE_MAP['key']:
                     sample_map_id = map_specification['id']
                 is_success, message = create_map(
-                    map_specification, self.map_product, geometry, self.output_directory, filename,
+                    map_specification,
+                    self.map_product,
+                    geometry,
+                    self.output_directory,
+                    filename,
                     data=data, output_map_format=self.output_map_format,
                     n_planned_value=self.n_planned_value,
                     yield_val=self.yield_average_form.value(),
                     min_yield_val=self.yield_minimum_form.value(),
                     max_yield_val=self.yield_maximum_form.value(),
-                    sample_map_id=sample_map_id, params=data
+                    sample_map_id=sample_map_id, params=data,
+                    crop_type=self.crop_type
                 )
 
                 if not is_success:
@@ -1495,7 +1515,8 @@ class GeosysPluginDockWidget(QtWidgets.QDockWidget, FORM_CLASS):
             self.clear_combo_box(self.sensor_combo_box)
             self.populate_sensors()
 
-        if map_product == SOIL['name'] or map_product == ELEVATION['key'] or map_product == SAMPLE_MAP['name'] or map_product == SLOPE['key']:
+        if (map_product == SOIL['name'] or map_product == ELEVATION['key']
+                or map_product == SAMPLE_MAP['name'] or map_product == SLOPE['key']):
             # Mask type not required for soil, elevation, and sample maps
             self.cb_mask.setEnabled(False)
         else:

@@ -16,8 +16,6 @@ from geosys.bridge_api.definitions import (
     INSEASONFIELD_AVERAGE_REVERSE_LAI
 )
 
-from geosys.utilities.utilities import log
-
 __copyright__ = "Copyright 2019, Kartoza"
 __license__ = "GPL version 3"
 __email__ = "rohmat@kartoza.com"
@@ -543,7 +541,7 @@ class BridgeAPI(ApiClient):
         rx_json = api_client.get_rx_map(url, request_data)
 
         return rx_json
-    
+
     def patch_rx_map(
             self,
             source_map_id,
@@ -567,6 +565,5 @@ class BridgeAPI(ApiClient):
         api_client = FieldLevelMapsAPIClient(
             self.access_token, self.bridge_server)
         rx_patch = api_client.patch_rx_map(source_map_id, patch_data)
-        
+
         return rx_patch
-    

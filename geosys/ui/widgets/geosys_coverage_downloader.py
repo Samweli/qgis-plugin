@@ -652,7 +652,9 @@ def create_map(
         max_yield_val,
         sample_map_id=None,
         data=None,
-        params=None):
+        params=None,
+        crop_type=None
+):
     """Create map based on given parameters.
 
     :param map_specification: Result of single map coverage specifications.
@@ -734,15 +736,15 @@ def create_map(
     ]
     if map_type_key == OM['key']:
         request_data = {
-                'Image': {
-                    "Id": image_id
-                },
-                "AverageOrganicMatter": 100,
-                'SeasonField': {
-                    'Id': season_field_id,
-                    'geometry': season_field_geom
-                }
+            'Image': {
+                "Id": image_id
+            },
+            "AverageOrganicMatter": 100,
+            'SeasonField': {
+                'Id': season_field_id,
+                'geometry': season_field_geom
             }
+        }
     elif map_type_key in nitrogen_maps:
         request_data = {
             'Image': {
@@ -754,6 +756,17 @@ def create_map(
             },
             "nPlanned": n_planned_value,
         }
+    elif map_type_key == LAI['key']:
+        request_data = {
+            'SeasonField': {
+                'geometry': season_field_geom,
+                'crop': crop_type
+            },
+            'Image': {
+                'Id': image_id
+            }
+        }
+
     else:
         request_data = {
             'SeasonField': {
